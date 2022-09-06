@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Function start</title>
+    <style>
+        .msgBox {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 242px;
+            background: #eee;
+        }
+
+        .msgBox p {
+            line-height: 1.5;
+            padding: 10px 20px;
+            color: #333;
+            padding-left: 82px;
+            background-position: 25px center;
+            background-repeat: no-repeat;
+
+        }
+
+        .msgBox button {
+            background: none;
+            border: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 1.1rem;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <button>Display message box</button>
+
+    <script>
+        const displayMessage = (msgText, msgType) => {
+            // HTML内のhmlを宣言したhtmlへ代入
+            const html = document.querySelector('html');
+
+            //div要素を作成したのち、panelへ代入（メッセージボックスの枠組み）
+            const panel = document.createElement('div');
+            // palelにmsgBoxというクラス名をつける
+            panel.setAttribute('class', 'msgBox');
+            // HTMLの末尾にpanelを追加
+            html.appendChild(panel);
+
+            // p要素を作成したのち、msgへ代入
+            const msg = document.createElement('p');
+            //msgのテキストに'This is a message box'を代入
+            msg.textContent = msgText;
+            // panelの末尾にmsg（テキスト）を追加
+            panel.appendChild(msg);
+
+            // button要素を作成したのち、closeBtnへ代入
+            const closeBtn = document.createElement('button');
+            // closeBtnに'x'を代入
+            closeBtn.textContent = 'x';
+            // panelの末尾にcloseBtnを追加
+            panel.appendChild(closeBtn);
+
+            //closeBtnがクリックされた時に実行する関数を定義
+            closeBtn.onclick = function () {
+                // panelが消える
+                panel.parentNode.removeChild(panel);
+            }
+
+            // msgTypeがwarningと堂々の場合
+            if (msgType === 'warning') {
+                // msgの背景画像は'url(icons/warning.png)
+                msg.style.backgroundImage = 'url(icons/warning.png)';
+                // panelの背景色は赤
+                panel.style.backgroundColor = 'red';
+                //msfTypeがchatの場合
+            } else if (msgType === 'chat') {
+                // msgの背景画像は'url(icons/chat.png)'
+                msg.style.backgroundImage = 'url(icons/chat.png)';
+                // panelの背景色はaqua
+                panel.style.backgroundColor = 'aqua';
+                //上記に当てはまらない場合
+            } else {
+                // msgの左にパディングを20px入れる
+                msg.style.paddingLeft = '20px';
+            }
+
+        }
+
+        // // displayMes sage関数を実行
+        displayMessage();
+
+        // html要素内にあるbutton要素をbtnに代入
+        const btn = document.querySelector('button');
+        // btnがクリックされた時displayMessageを呼び出す
+        // btn.addEventListener('click',displayMessage);
+
+        btn.onclick = function () {
+            displayMessage('Brian: Hi there, how are you today?','chat');
+        };
+
+
+    </script>
+</body>
+
+</html>
